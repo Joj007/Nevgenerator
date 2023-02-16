@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,7 +45,7 @@ namespace Név_generátor
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Válassz fájlt!";
-            if (ofd.ShowDialog()==true)
+            if (ofd.ShowDialog() == true)
             {
                 lista.Items.Clear();
                 string[] nevek = System.IO.File.ReadAllLines(ofd.FileName);
@@ -56,7 +56,7 @@ namespace Név_generátor
                 listaDb.Content = szoveg + NevekSzama(lista);
                 Frissites();
             }
-            
+
         }
 
         private int NevekSzama(ListBox lista)
@@ -102,7 +102,7 @@ namespace Név_generátor
         {
             Frissites();
             Random rand = new Random();
-            if (rdoUtonevekEgy.IsChecked==true)
+            if (rdoUtonevekEgy.IsChecked == true)
             {
                 for (int i = 0; i < sliGeneralandoNevekSzama.Value; i++)
                 {
@@ -148,7 +148,7 @@ namespace Név_generátor
             }
             lbGeneraltNevek.Items.Clear();
 
-            
+
 
             Frissites();
             UgrasListaAljara();
@@ -166,7 +166,7 @@ namespace Név_generátor
         private void btnRendez_Click(object sender, RoutedEventArgs e)
         {
             stbRendezes.Content = "Rendezett névsor!";
-            lbGeneraltNevek.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Content",System.ComponentModel.ListSortDirection.Ascending)); ;
+            lbGeneraltNevek.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("",System.ComponentModel.ListSortDirection.Ascending));
         }
 
         private void btnMent_Click(object sender, RoutedEventArgs e)
@@ -222,8 +222,8 @@ namespace Név_generátor
             {
                 sliGeneralandoNevekSzama.Value = 0;
             }
-            
-            
+
+
         }
 
         private void lbGeneraltNevek_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -233,7 +233,7 @@ namespace Név_generátor
                 string[] torlendoNev = lbGeneraltNevek.SelectedItem.ToString().Split(" ");
                 lbCsaladnevek.Items.Add(torlendoNev[0]);
                 lbUtonevek.Items.Add(torlendoNev[1]);
-                if (torlendoNev[1].Length == 3)
+                if (torlendoNev.Length == 3)
                 {
                     lbUtonevek.Items.Add(torlendoNev[2]);
                 }
