@@ -166,7 +166,7 @@ namespace Név_generátor
         private void btnRendez_Click(object sender, RoutedEventArgs e)
         {
             stbRendezes.Content = "Rendezett névsor!";
-            lbGeneraltNevek.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("",System.ComponentModel.ListSortDirection.Ascending));
+            lbGeneraltNevek.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Ascending));
         }
 
         private void btnMent_Click(object sender, RoutedEventArgs e)
@@ -179,21 +179,7 @@ namespace Név_generátor
             if (sfd.ShowDialog() == true)
             {
                 string extesion = System.IO.Path.GetExtension(sfd.FileName);
-                string separator = "";
-
-                switch (extesion)
-                {
-                    case ".txt ":
-                        separator = "\n";
-                        break;
-                    case ".csv":
-                        separator = ";";
-                        break;
-                    default:
-                        separator = " ";
-                        break;
-                }
-                File.WriteAllText(sfd.FileName, Tartalom(separator));
+                File.WriteAllText(sfd.FileName, Tartalom(extesion));
             }
         }
 
@@ -243,13 +229,26 @@ namespace Név_generátor
             }
         }
 
-        private string Tartalom(string separator)
+        private string Tartalom(string ext)
         {
             string tartalom = "";
-            foreach (var nev in lbGeneraltNevek.Items)
+            if (ext==".txt ")
             {
-                tartalom += nev + separator;
+                foreach (var nev in lbGeneraltNevek.Items)
+                {
+                    tartalom += nev + "\n";
+                }
             }
+            else if (ext==".csv")
+            {
+                foreach (var nev in lbGeneraltNevek.Items)
+                {
+                    string[] nevsor=nev.ToString().Split(" ");
+                    tartalom += string.Join(";", nevsor);
+                    tartalom += "\n";
+                }
+            }
+
             return tartalom;
         }
     }
